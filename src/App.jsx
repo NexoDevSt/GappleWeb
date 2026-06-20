@@ -1,122 +1,113 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React, { useState } from 'react';
+import './Landing.css';
+import logo from './assets/LogGapple.png';
+import { FaDiscord, FaShoppingCart, FaBook, FaTiktok, FaYoutube, FaInstagram, FaFacebook } from 'react-icons/fa';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [copied, setCopied] = useState(null);
+  
+  const serverIPPrem = "gapple.club";
+  const serverIPNoPrem = "np.gapple.club";
+  const serverPortBedrock = "19132";
+
+  const handleCopy = (type, text) => {
+    navigator.clipboard.writeText(text);
+    setCopied(type);
+    setTimeout(() => setCopied(null), 2000);
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <div className="landing-container">
+      
+      <header className="header wrapper">
+        <div className="logo-container">
+          <span></span> 
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+        <button className="btn-top-right">Postularse para staff</button>
+      </header>
 
-      <div className="ticks"></div>
+      <main className="hero wrapper">
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        <img src={logo} alt="Logo del Servidor" className="server-icon" />
+        
+        <h1 className="title">
+          <span className="gradient-text">Gapple Club</span>
+        </h1>
+        
+        <p className="subtitle">
+          Unete a la comunidad más épica de Minecraft. ¡Diversión, eventos y aventuras te esperan en Gapple Club!
+        </p>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+        <div className="ip-grid-container">
+          
+          <div className="ip-box premium">
+            <div className="ip-text-container">
+              <div className="ip-label">Servidor Premium</div>
+              <div className="ip-address">{serverIPPrem}</div>
+            </div>
+            <button className="btn-copy" onClick={() => handleCopy('prem', serverIPPrem)}>
+              {copied === 'prem' ? '¡Copiado! ✓' : 'Copiar IP'}
+            </button>
+          </div>
+
+          <div className="ip-box no-premium">
+            <div className="ip-text-container">
+              <div className="ip-label">Servidor No-Premium</div>
+              <div className="ip-address">{serverIPNoPrem}</div>
+            </div>
+            <button className="btn-copy" onClick={() => handleCopy('noprem', serverIPNoPrem)}>
+              {copied === 'noprem' ? '¡Copiado! ✓' : 'Copiar IP'}
+            </button>
+          </div>
+
+          <div className="ip-box bedrock-port">
+            <div className="ip-text-container">
+              <div className="ip-label">Puerto Bedrock</div>
+              <div className="ip-address">{serverPortBedrock}</div>
+            </div>
+            <button className="btn-copy" onClick={() => handleCopy('bedrock', serverPortBedrock)}>
+              {copied === 'bedrock' ? '¡Copiado! ✓' : 'Copiar Puerto'}
+            </button>
+          </div>
+
+        </div>
+
+        <div className="buttons-grid">
+          <a href="https://discord.gapple.club" target="_blank" rel="noopener noreferrer" className="btn-nav">
+            <FaDiscord /> Discord
+          </a>
+          <a href="https://tienda.gapple.club" target="_blank" rel="noopener noreferrer" className="btn-nav">
+            <FaShoppingCart /> Tienda
+          </a>
+          <a href="https://wiki.gapple.club" target="_blank" rel="noopener noreferrer" className="btn-nav">
+            <FaBook /> Wiki
+          </a>
+          
+          <a href="https://tiktok.gapple.club" target="_blank" rel="noopener noreferrer" className="btn-nav btn-icon">
+            <FaTiktok />
+          </a>
+          <a href="https://youtube.gapple.club" target="_blank" rel="noopener noreferrer" className="btn-nav btn-icon">
+            <FaYoutube />
+          </a>
+          <a href="https://instagram.gapple.club" target="_blank" rel="noopener noreferrer" className="btn-nav btn-icon">
+            <FaInstagram />
+          </a>
+          <a href="https://facebook.gapple.club" target="_blank" rel="noopener noreferrer" className="btn-nav btn-icon">
+            <FaFacebook />
+          </a>
+        </div>
+
+      </main>
+
+      <footer className="footer wrapper">
+        <p>&copy; 2026 Gapple Club. Todos los derechos reservados.</p>
+        <div className="footer-links">
+          <p>Gapple.club no tiene ninguna relacion con Mojang ni con Microsoft.</p>
+        </div>
+      </footer>
+
+    </div>
+  );
 }
 
-export default App
+export default App;
